@@ -39,6 +39,7 @@ RoboChihuahua.prototype.getLoginToken = function(accessToken, username, password
              uri: 'https://prd-tac-api01.cfrprd.com/oauth/token',
              headers: {
                         'content-type': 'application-json', 
+                        authorization: 'bearer' + accessToken,
              },
              body: JSON.stringify({grant_type: 'password_grant',userName: username,password: password,}),
             },
