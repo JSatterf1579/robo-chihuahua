@@ -22,13 +22,15 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
                         callback(error);
             } else {
                 if(response.statusCode == 200) {
-                    callback(null, response.body)
+                    //callback(null, response.body)
+                    var jsonBody = JSON.parse(body);
+                    callback(null, jsonBody.access_token);
                 } else {
-                    callback('Unexpected reponse recieved from server: ' + response.statusCode)
+                    callback('Unexpected reponse recieved from server: ' + response.statusCode);
                 }
             }
         }
-    )
+    );
 }
 
 
