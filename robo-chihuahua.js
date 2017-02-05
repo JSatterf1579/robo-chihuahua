@@ -9,5 +9,27 @@ var RoboChihuahua = function(config) {
     this.password = config.password;
 }
 
+RoboChihuahua.prototype.getInitialToken = function(callback) {
+    request({method: 'GET',
+             uri: 'https://www.tacobell.com/api/sitecore/oauth/token',
+             headers: {
+                        'content-type': 'application-json', 
+             }
+
+        },
+        function(error, response, body) {
+            if(error) {
+                        callback(error);
+            } else {
+                if(response.statusCode == 200) {
+                    callback(null, response.body)
+                } else {
+                    callback('Unexpected reponse recieved from server: ' + response.statusCode)
+                }
+            }
+        }
+    )
+}
+
 
 module.exports = RoboChihuahua;
