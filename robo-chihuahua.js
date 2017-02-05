@@ -67,7 +67,7 @@ RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) 
                         Authorization: 'bearer ' + accessToken,
              },
             },
-            makeDefaultRequestCallback(callback)
+            makeDefaultRequestCallback(callback, 200)
     )
 };
 
@@ -79,7 +79,7 @@ RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
                         Authorization: 'bearer ' + accessToken,
              },
             },
-            makeDefaultRequestCallback(callback)
+            makeDefaultRequestCallback(callback, 200)
     )
 };
 
@@ -91,16 +91,16 @@ RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) 
                         Authorization: 'bearer ' + accessToken,
              },
             },
-            makeDefaultRequestCallback(callback)
+            makeDefaultRequestCallback(callback, 201)
     )
 };
 
-function makeDefaultRequestCallback(callback) {
+function makeDefaultRequestCallback(callback, expectedResponse) {
     return function(error, response, body) {
         if(error) {
             callback(error)
         } else {
-            if(response.statusCode == 200) {
+            if(response.statusCode == expectedResponse) {
                 callback(null, body);
             } else {
                 callback('Unexpected response recieved from server: ' + response.statusCode + body)
