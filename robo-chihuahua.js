@@ -58,6 +58,32 @@ RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
             }
     )
 };
+
+RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) {
+    request({method: 'GET',
+             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders' + orderId,
+             headers: {
+                        'content-type': 'application/json', 
+                        Authorization: 'bearer' + accessToken,
+             },
+            },
+            makeDefaultRequestCallback(callback)
+    )
+};
+
+function makeDefaultRequestCallback(callback) {
+    return function(error, response, body) {
+        if(error) {
+            callback(error)
+        } else {
+            if(response.statusCode == 200) {
+                callback(null, body);
+            } else {
+                callback('Unexpected response recieved from server: ' + respose.statusCode)
+            }
+        }
+    }
+};
     
 
 
