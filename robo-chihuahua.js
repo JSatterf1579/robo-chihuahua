@@ -34,7 +34,7 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
     )
 };
 
-RoboChihuahua.prototype.getLoginToken = function(accessToken, username, passwd, callback) {
+RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
     var accessString = 'bearer ' + accessToken;
     request({method: 'POST',
              uri: 'https://prd-tac-api01.cfrprd.com/oauth/token',
@@ -42,7 +42,7 @@ RoboChihuahua.prototype.getLoginToken = function(accessToken, username, passwd, 
                         'content-type': 'application/json', 
                         Authorization: accessString,
              },
-             body: JSON.stringify({grant_type: 'password_grant',userName: username,'password': passwd}),
+             body: JSON.stringify({grant_type: 'password_grant',userName: this.username,'password': this.password}),
             },
             function (error, response, body) {
                 if(error) {
