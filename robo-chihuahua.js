@@ -83,6 +83,18 @@ RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
     )
 };
 
+RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) {
+    request({method: 'POST',
+             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + orderId + '/reorder',
+             headers: {
+                        'content-type': 'application/json', 
+                        Authorization: 'bearer ' + accessToken,
+             },
+            },
+            makeDefaultRequestCallback(callback)
+    )
+};
+
 function makeDefaultRequestCallback(callback) {
     return function(error, response, body) {
         if(error) {
