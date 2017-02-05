@@ -71,6 +71,18 @@ RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) 
     )
 };
 
+RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
+    request({method: 'GET',
+             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me',
+             headers: {
+                        'content-type': 'application/json', 
+                        Authorization: 'bearer ' + accessToken,
+             },
+            },
+            makeDefaultRequestCallback(callback)
+    )
+};
+
 function makeDefaultRequestCallback(callback) {
     return function(error, response, body) {
         if(error) {
