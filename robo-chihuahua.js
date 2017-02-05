@@ -9,6 +9,7 @@ var RoboChihuahua = function(config) {
     this.password = config.password;
 }
 
+//Retrieve initial access token
 RoboChihuahua.prototype.getInitialToken = function(callback) {
     request({method: 'GET',
              uri: 'https://www.tacobell.com/api/sitecore/oauth/token',
@@ -30,8 +31,32 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
                 }
             }
         }
-    );
-}
+    )
+};
+
+RoboChihuahua.prototype.getLoginToken = function(accessToken, username, password, callback) {
+    request({method: 'POST',
+             uri: 'https://prd-tac-api01.cfrprd.com/oauth/token',
+             headers: {
+                        'content-type': 'application-json', 
+             },
+             body: JSON.stringify({grant_type: 'password_grant',userName: username,password: password,}),
+            },
+            function (error, response, body) {
+                if(error) {
+                    callback(error);
+                } else {
+                    if(response.statusCode == 200) {
+                        var jsonBody = JSON.parse(body);
+                        callback(null, jsonBody.access_token);
+                    } else {
+                        callback('Unexpected reponse recieved from server: ' + response.statusCode);
+                    }
+                }
+            }
+    )
+};
+    
 
 
 module.exports = RoboChihuahua;
