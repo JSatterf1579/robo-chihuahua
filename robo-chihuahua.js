@@ -108,6 +108,30 @@ RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, oldRestaurant
     );
 };
 
+RoboChihuahua.prototype.completeOrder = function(accessToken, restaurantId, orderId, cardName, zipCode, cvv, cardNumber, expMonth, expYear, callback) {
+    request({
+        method: 'POST',
+        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + oldRestaurantId + '-' + orderId + '/checkout',
+        headers: {
+            'content-type': 'application/json', 
+            Authorization: 'bearer ' + accessToken,
+        },
+        body: JSON.stringify({
+            paymentType: 'NewCreditCard',
+            nameOnCard: cardName,
+            postalCode: zipCode,
+            'cvv': cvv,
+            'cardNumber': cardNumber,
+            expiration: {
+                month: expMonth,
+                year: expYear
+            },
+        }),
+    },
+    makeDefaultRequestCallback(callback, 200)
+    );
+};
+
 function makeDefaultRequestCallback(callback, expectedResponse) {
     return function(error, response, body) {
         if(error) {
