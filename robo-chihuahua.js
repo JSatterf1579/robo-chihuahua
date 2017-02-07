@@ -94,10 +94,10 @@ RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) 
     )
 };
 
-RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, newRestaurantId, callback) {
+RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, oldRestaurantId, newRestaurantId, callback) {
     request({
         method: 'POST',
-        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + orderId + '/move',
+        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + oldRestaurantId + '-' + orderId + '/move',
         headers: {
             'content-type': 'application/json', 
             Authorization: 'bearer ' + accessToken,
