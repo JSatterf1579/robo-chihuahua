@@ -15,8 +15,7 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
              uri: 'https://www.tacobell.com/api/sitecore/oauth/token',
              headers: {
                         'content-type': 'application/json', 
-             }
-
+             },
         },
         function(error, response, body) {
             if(error) {
@@ -31,7 +30,7 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
                 }
             }
         }
-    )
+    );
 };
 
 RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
@@ -56,7 +55,7 @@ RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
                     }
                 }
             }
-    )
+    );
 };
 
 RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) {
@@ -68,7 +67,7 @@ RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) 
              },
             },
             makeDefaultRequestCallback(callback, 200)
-    )
+    );
 };
 
 RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
@@ -80,7 +79,7 @@ RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
              },
             },
             makeDefaultRequestCallback(callback, 200)
-    )
+    );
 };
 
 RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) {
@@ -93,6 +92,20 @@ RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) 
             },
             makeDefaultRequestCallback(callback, 201)
     )
+};
+
+RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, newRestaurantId, callback) {
+    request({
+        method: 'POST',
+        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + orderId + '/move',
+        headers: {
+            'content-type': 'application/json', 
+            Authorization: 'bearer ' + accessToken,
+        },
+        body: JSON.stringify({'newRestaurantId' : newRestaurantId}),
+        },
+        makeDefaultRequestCallback(callback, 200)
+    );
 };
 
 function makeDefaultRequestCallback(callback, expectedResponse) {
