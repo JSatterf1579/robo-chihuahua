@@ -111,7 +111,7 @@ RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, oldRestaurant
 RoboChihuahua.prototype.completeOrder = function(accessToken, restaurantId, orderId, cardName, zipCode, cvv, cardNumber, expMonth, expYear, callback) {
     request({
         method: 'POST',
-        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + oldRestaurantId + '-' + orderId + '/checkout',
+        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + restaurantId + '-' + orderId + '/checkout',
         headers: {
             'content-type': 'application/json', 
             Authorization: 'bearer ' + accessToken,
