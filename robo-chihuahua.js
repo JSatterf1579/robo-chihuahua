@@ -126,6 +126,7 @@ RoboChihuahua.prototype.completeOrder = function(accessToken, restaurantId, orde
                 month: expMonth,
                 year: expYear
             },
+            savePaymentInformation: true
         }),
     },
     makeDefaultRequestCallback(callback, 200)
