@@ -1,6 +1,9 @@
 "use strict";
 var request = require('request')
 
+
+var endpointPrefix = 'https://prd-tac-api01.cfrprd.com';
+
 /**
  * User specific error and response handling
  * @callback responseCallback
@@ -58,7 +61,7 @@ RoboChihuahua.prototype.getInitialToken = function(callback) {
 RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
     var accessString = 'bearer ' + accessToken;
     request({method: 'POST',
-             uri: 'https://prd-tac-api01.cfrprd.com/oauth/token',
+             uri: endpointPrefix + '/oauth/token',
              headers: {
                         'content-type': 'application/json', 
                         Authorization: accessString,
@@ -88,7 +91,7 @@ RoboChihuahua.prototype.getLoginToken = function(accessToken, callback) {
  */
 RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) {
     request({method: 'GET',
-             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + orderId,
+             uri: endpointPrefix + '/account-management/v1/users/me/orders/' + orderId,
              headers: {
                         'content-type': 'application/json', 
                         Authorization: 'bearer ' + accessToken,
@@ -105,7 +108,7 @@ RoboChihuahua.prototype.getOrderData = function(accessToken, orderId, callback) 
  */
 RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
     request({method: 'GET',
-             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me',
+             uri: endpointPrefix + '/account-management/v1/users/me',
              headers: {
                         'content-type': 'application/json', 
                         Authorization: 'bearer ' + accessToken,
@@ -124,7 +127,7 @@ RoboChihuahua.prototype.getAccountData = function(accessToken, callback) {
  */
 RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) {
     request({method: 'POST',
-             uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + orderId + '/reorder',
+             uri: endpointPrefix + '/account-management/v1/users/me/orders/' + orderId + '/reorder',
              headers: {
                         'content-type': 'application/json', 
                         Authorization: 'bearer ' + accessToken,
@@ -146,7 +149,7 @@ RoboChihuahua.prototype.reorderOrder = function(accessToken, orderId, callback) 
 RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, oldRestaurantId, newRestaurantId, callback) {
     request({
         method: 'POST',
-        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + oldRestaurantId + '-' + orderId + '/move',
+        uri: endpointPrefix + '/account-management/v1/users/me/orders/' + oldRestaurantId + '-' + orderId + '/move',
         headers: {
             'content-type': 'application/json', 
             Authorization: 'bearer ' + accessToken,
@@ -174,7 +177,7 @@ RoboChihuahua.prototype.moveOrder = function(accessToken, orderId, oldRestaurant
 RoboChihuahua.prototype.completeOrder = function(accessToken, restaurantId, orderId, cardName, zipCode, cvv, cardNumber, expMonth, expYear, callback) {
     request({
         method: 'POST',
-        uri: 'https://prd-tac-api01.cfrprd.com/account-management/v1/users/me/orders/' + restaurantId + '-' + orderId + '/checkout',
+        uri: endpointPrefix + '/account-management/v1/users/me/orders/' + restaurantId + '-' + orderId + '/checkout',
         headers: {
             'content-type': 'application/json', 
             Authorization: 'bearer ' + accessToken,
