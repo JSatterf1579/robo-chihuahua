@@ -4,7 +4,7 @@
 A simple implemenation of Taco Bell's API for online orders.
 Requires the [Request](https://github.com/request/request) library.
 
-Since there's no public available documentation for the API, and really no acknowledgement
+Since there's no public;y available documentation for the API, and really no acknowledgement
 of it at all, I can't guarentee that everything won't break some day.
 
 ## Current features
